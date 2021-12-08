@@ -1,0 +1,29 @@
+Instance name : i-0e5085b1567961fa4
+Public IP : 52.47.164.120
+
+
+//PHP CONFIG
+-->Installer apache*
+sudo apt update
+sudo apt install apache2 -y
+systemctl status apache2
+
+-->Installer PHP
+sudo apt update
+sudo apt install php libapache2-mod-php
+
+//Pour tester si php est enebled
+ls /etc/apache2/mods-enabled/*php*
+==>to enable php :sudo a2enmod php7.3 #sudo a2dismod php7.3
+
+
+sudo service apache2 restart
+
+
+###############"Important##########################"
+sudo chmod 777 /var/www/html -R ==> Pour transféréer les docs dans /var/www/html avec FileZilla
+
+//Filezilla : cnx avec mdp sans key avec key et puis click droit transféréer
+
+
+LINK : https://www.youtube.com/watch?v=bT7sKg7ggws

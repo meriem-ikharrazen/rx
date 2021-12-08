@@ -1,0 +1,91 @@
+i-0654a0fc483558245
+
+
+//Création groupe 
+sudo groupadd [nom du groupe]
+
+//change pwd of admin
+sudo passwd admin
+
+//rendre user admin
+sudo usermod -aG sudo user
+
+//show all sudoers
+grep -Po '^sudo.+:\K.*$' /etc/group
+
+
+sudo adduser --ingroup nomGroupe nomUser
+
+//allow user to connect with ssh key
+su -l nomUser
+mkdir .ssh
+chmod 700 .ssh
+touch .ssh/authorized_keys
+chmod 600 .ssh/authorized_keys
+nano ~/.ssh/authorized_keys
+
+
+//with ssh key and password
+sudo vi /etc/ssh/sshd_config  ==> passwordauthentication yes/Pubkeyauthentication yes/AuthenticationMethods "publickey,password"
+sudo service ssh restart
+
+//connect other users
+
+sudo usermod -g nomgroupe nomuser --> changer user's primary group group
+sudo usermod -aG sudo meriem --> pour ajouter un utilisateur à la lsite des sudoers
+
+
+
+//Configuration de Fail2Ban :
+sudo apt-get update
+sudo apt install fail2ban
+sudo service fail2ban start (pour activer et démarrer fail2ban)
+sudo nano /etc/fail2ban/jail.local 
+	[ssh] 
+	enabled=true 
+	port = ssh 
+	filter = sshd
+	logpath = /var/log/auth.log
+	maxentry = 3
+	bandtime = 300
+	ignoreip = 127.0.0.1
+
+
+//Config PHPMYADMIN
+sudo apt update
+sudo apt install mariadb-server
+sudo systemctl status mariadb
+sudo mysql_secure_installation
+
+
+
+sudo apt install apache2 -y
+systemctl status apache2
+sudo apt install php7.3 php-mysql php-xml
+php --version
+sudo apache2ctl -M ==>pour voir les modules installés
+
+//Install phpmyadmin (tjrs ls)
+cd /var/www/html
+sudo apt-get install wget
+sudo wget https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-english.tar.gz
+sudo tar xvf php + TAB
+sudo rm -R php+TAB(.tar.gz)
+sudo mv ancienNom phpmyadmin
+
+
+sudo mysql -u root -p
+GRANT ALL ON *.* TO 'meriem'@'localhost' IDENTIFIED BY 'meriem';
+FLUSH PRIVILEGES;
+\q
+
+
+
+LINK : https://www.youtube.com/watch?v=Da6baAwTVzg
+
+
+
+
+
+
+

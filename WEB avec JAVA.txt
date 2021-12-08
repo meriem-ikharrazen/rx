@@ -1,0 +1,68 @@
+Instance name :  i-0e662070c9bbbc0a3
+Public IP : 13.38.102.52
+
+https://github.com/meriem-ikharrazen/WebSite-for-club-events-and-training
+
+//Config PHPMYADMIN
+sudo apt update
+sudo apt install mariadb-server
+sudo systemctl status mariadb
+sudo mysql_secure_installation
+
+
+
+sudo apt install apache2 -y
+systemctl status apache2
+sudo apt install php7.3 php-mysql php-xml
+php --version
+sudo apache2ctl -M ==>pour voir les modules installés
+
+//Install phpmyadmin (tjrs ls)
+cd /var/www/html
+sudo apt-get install wget
+sudo wget https://files.phpmyadmin.net/phpMyAdmin/5.1.1/phpMyAdmin-5.1.1-english.tar.gz
+sudo tar xvf php + TAB
+sudo rm -R php+TAB(.tar.gz)
+sudo mv ancienNom phpmyadmin
+
+
+sudo mysql -u root -p
+GRANT ALL ON *.* TO 'meriem'@'localhost' IDENTIFIED BY 'meriem';
+FLUSH PRIVILEGES;
+\q
+
+
+//Check port my sql to configure application.properties port 
+sudo mysql -u root -p
+SHOW GLOBAL VARIABLES LIKE 'PORT';
+
+
+
+//JAVA CONFIGURATION
+sudo apt install default-jre
+sudo nano nano /etc/environement
+JAVA_HOME=" /usr/lib/jvm/java-11-openjdk-amd64"
+
+//Extraction du fichier jar
+dans location du projet ==> mvn clean install (faut vérifier que mvn est dans l'envi du sys)
+
+
+Après on envoie le fichier .jar uniquement
+et on exécute dans l'inst
+java -jar nom.jar (problème au niveau du port du mysql et aujthentification)
+
+
+( sudo chmod 0644 /etc/mysql/mariadb.conf.d/50-server.cnf pt etre)
+sudo vi /etc/mysql/mariadb.conf.d/50-server.cnf
+Port = 3308
+sudo service mysql start
+sudo mysql -u root -p
+SHOW GLOBAL VARIABLES LIKE 'PORT';
+
+sudo mysqld_safe --skip-grant-tables &
+sudo mysql -u root
+
+
+
+https://docs.rackspace.com/support/how-to/reset-a-mysql-root-password/
+https://www.liquidweb.com/kb/error-login-without-a-password-is-forbidden-by-configuration-see-allownopassword-solved/
